@@ -89,5 +89,27 @@ const createTripsTable = async () => {
     console.error('⚠️ error creating destinations table', err)
   }
 
+  const createActivitiesTable = async () => {
+    const createActivitiesTableQuery = `
+        CREATE TABLE IF NOT EXISTS activities (
+            id serial PRIMARY KEY,
+            trip_id int NOT NULL,
+            activity varchar(100) NOT NULL,
+            num_votes integer DEFAULT 0,
+            FOREIGN KEY(trip_id) REFERENCES trips(id)
+        );
+    `
+  }
+
+  try {
+    const res = await pool.query(createActivitiesTableQuery)
+    console.log('🎉 activities table created successfully')
+  }
+
+  catch (err) {
+    console.error('⚠️ error creating activities table', err)
+  }
+
   seedTripsTable()
   createDestinationsTable()
+  createActivitiesTable()
