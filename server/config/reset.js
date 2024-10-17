@@ -65,4 +65,29 @@ const createTripsTable = async () => {
     })
   })
 
+
+  const createDestinationsTable = async () => {
+    const createDestinationsTableQuery = `
+        CREATE TABLE IF NOT EXISTS destinations (
+            id serial PRIMARY KEY,
+            destination varchar(100) NOT NULL,
+            description varchar(500) NOT NULL,
+            city varchar(100) NOT NULL,
+            country varchar(100) NOT NULL,
+            img_url text NOT NULL,
+            flag_img_url text NOT NULL
+        );
+    `
+  }
+
+  try {
+    const res = await pool.query(createDestinationsTableQuery)
+    console.log('🎉 destinations table created successfully')
+  }
+
+  catch (err) {
+    console.error('⚠️ error creating destinations table', err)
+  }
+
   seedTripsTable()
+  createDestinationsTable()
