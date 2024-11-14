@@ -1,0 +1,9 @@
+{
+    "dependencies": {
+      "start": "npx http-server ./dist",
+      "express-session": "^1.18.1",
+      "passport": "^0.7.0",
+      "passport-github2": "^0.1.12"
+    }
+  }
+  
